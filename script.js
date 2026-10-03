@@ -58,4 +58,33 @@ function makeOrderNo(){const d=new Date();return 'SM-'+String(d.getFullYear()).s
 function closeReceipt(){receiptModal?.classList.remove('open');receiptModal?.setAttribute('aria-hidden','true')}
 document.querySelector('.receiptClose')?.addEventListener('click',closeReceipt);
 receiptModal?.addEventListener('click',e=>{if(e.target===receiptModal)closeReceipt()});
-checkoutForm?.addEventListener('submit',async e=>{e.preventDefault();if(!cart.length)return;const btn=checkoutForm.querySelector('.submitOrderBtn');btn.disabled=true;btn.textContent='Ուղարկվում է…';const orderNo=makeOrderNo();const customerName=checkoutForm.elements.name.value.trim();const customerEmail=checkoutForm.elements.email.value.trim();const customerPhone=checkoutForm.elements.phone.value.trim();const customerAddress=checkoutForm.elements.address.value.trim();const snapshot=cart.map(x=>({...x}));orderDetails.value='Պատվեր № '+orderNo+'\n'+orderText();try{const fd=new FormData(checkoutForm);fd.set('_subject','Նոր պատվեր '+orderNo+' — Stop Market');fd.set('_autoresponse',`Շնորհակալություն Ձեր պատվերի համար։\n\nՁեր պատվերը հաջողությամբ ընդունվել է Stop Market-ի կողմից։\nՊատվեր № ${orderNo}\n\n${orderText()}\n\nՄեր աշխատակիցը շուտով կկապվի Ձեզ հետ պատվերը հաստատելու և առաքումը համաձայնեցնելու համար։\n\nStop Market\nstopmarket.am`);const r=await fetch('https://formsubmit.co/ajax/stopmarketllc@gmail.com',{method:'POST',headers:{'Accept':'application/json'},body:fd});if(!r.ok)throw new Error('send');closeCheckout();receiptNumber.textContent='Պատվեր № '+orderNo;receiptDetails.innerHTML='<h3>Ձեր պատվերը</h3>'+snapshot.map(x=>`<div class="receiptLine"><span>${x.name} × ${x.qty}</span><b>${x.price}</b></div>`).join('')+`<div class="receiptCustomer"><b>${customerName}</b><br>${customerPhone}<br>${customerEmail}<br>${customerAddress}</div>`;receiptMailNote.textContent='Պատվերի հաստատումը ուղարկվել է նաև '+customerEmail+' հասցեին։';receiptModal.classList.add('open');receiptModal.setAttribute('aria-hidden','false');cart=[];saveCart();checkoutForm.reset()}catch(err){orderStatus.textContent='Չհաջողվեց ուղարկել պատվերը։ Խնդրում ենք փորձել կրկին կամ զանգահարել +374 41 03 30 03։';orderStatus.classList.remove('success')}finally{btn.disabled=false;btn.textContent='Հաստատել պատվերը'}});
+checkoutForm?.addEventListener('submit',e=>{
+  e.preventDefault();
+  if(!cart.length)return;
+  const btn=checkoutForm.querySelector('.submitOrderBtn');
+  btn.disabled=true;
+  btn.textContent='Ուղարկվում է…';
+  const orderNo=makeOrderNo();
+  const customerName=checkoutForm.elements.name.value.trim();
+  const customerEmail=checkoutForm.elements.email.value.trim();
+  const customerPhone=checkoutForm.elements.phone.value.trim();
+  const customerAddress=checkoutForm.elements.address.value.trim();
+  const snapshot=cart.map(x=>({...x}));
+  orderDetails.value='Պատվեր № '+orderNo+'\n'+orderText();
+  const subject=checkoutForm.querySelector('input[name="_subject"]');
+  if(subject)subject.value='Նոր պատվեր '+orderNo+' — Stop Market';
+  let auto=checkoutForm.querySelector('input[name="_autoresponse"]');
+  if(!auto){auto=document.createElement('input');auto.type='hidden';auto.name='_autoresponse';checkoutForm.appendChild(auto)}
+  auto.value=`Շնորհակալություն Ձեր պատվերի համար։\n\nՁեր պատվերը հաջողությամբ ընդունվել է Stop Market-ի կողմից։\nՊատվեր № ${orderNo}\n\n${orderText()}\n\nՄեր աշխատակիցը շուտով կկապվի Ձեզ հետ պատվերը հաստատելու և առաքումը համաձայնեցնելու համար։\n\nStop Market\nstopmarket.am`;
+  const reply=checkoutForm.querySelector('#replyToEmail');if(reply)reply.value=customerEmail;
+  // Native POST to a hidden iframe: this keeps the customer on the site and allows FormSubmit autoresponse.
+  checkoutForm.submit();
+  closeCheckout();
+  receiptNumber.textContent='Պատվեր № '+orderNo;
+  receiptDetails.innerHTML='<h3>Ձեր պատվերը</h3>'+snapshot.map(x=>`<div class="receiptLine"><span>${x.name} × ${x.qty}</span><b>${x.price}</b></div>`).join('')+`<div class="receiptCustomer"><b>${customerName}</b><br>${customerPhone}<br>${customerEmail}<br>${customerAddress}</div>`;
+  receiptMailNote.textContent='Պատվերի հաստատումը ուղարկվում է նաև '+customerEmail+' հասցեին։';
+  receiptModal.classList.add('open');
+  receiptModal.setAttribute('aria-hidden','false');
+  cart=[];saveCart();checkoutForm.reset();
+  setTimeout(()=>{btn.disabled=false;btn.textContent='Հաստատել պատվերը'},1200);
+});
