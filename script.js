@@ -64,8 +64,26 @@ function localizedPrice(item){return moneyNumber(item[2])?item[2]:ui().ask}
 function cartDisplay(entry){const record=productRecord(entry.productId)||productRecords.find(r=>r.item[3]===entry.img&&r.item[2]===entry.price&&r.item[0]===entry.name);return record?{...entry,...localizedItem(record.item),price:localizedPrice(record.item)}:entry}
 let activeCategory=null,searchTerm='';
 const searchStatus=document.querySelector('.searchStatus');
-function revealCards(){const cards=document.querySelectorAll('.catalogPage.active .categoryCard,.catalogPage.active .variantCard');cards.forEach((card,index)=>{card.style.setProperty('--reveal-delay',(index%4)*65+'ms');if(window.matchMedia('(prefers-reduced-motion: reduce)').matches||!('IntersectionObserver' in window))return;card.classList.add('reveal');revealObserver.observe(card)})}
-const revealObserver='IntersectionObserver' in window?new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('revealed');revealObserver.unobserve(entry.target)}}),{threshold:.08,rootMargin:'0px 0px 30px 0px'}):null;
+const cardMotionReduced=window.matchMedia('(prefers-reduced-motion: reduce)');
+const revealObserver='IntersectionObserver' in window?new IntersectionObserver(entries=>{
+ const entering=entries.filter(entry=>entry.isIntersecting).sort((a,b)=>a.boundingClientRect.top-b.boundingClientRect.top||a.boundingClientRect.left-b.boundingClientRect.left);
+ entering.forEach((entry,index)=>{
+  entry.target.style.setProperty('--reveal-delay',Math.min(index,5)*100+'ms');
+  entry.target.classList.add('revealed');
+  revealObserver.unobserve(entry.target);
+ });
+},{threshold:0.12,rootMargin:'0px 0px -24px 0px'}):null;
+function revealCards(){
+ const cards=document.querySelectorAll('.catalogPage.active .categoryCard,.catalogPage.active .variantCard');
+ cards.forEach(card=>{
+  revealObserver?.unobserve(card);
+  card.classList.remove('reveal','revealed');
+  if(cardMotionReduced.matches||!revealObserver)return;
+  card.classList.add('reveal');
+  revealObserver.observe(card);
+ });
+}
+cardMotionReduced.addEventListener?.('change',()=>revealCards());
 function renderProductCards(records){variantGrid.innerHTML=records.map(r=>{const i=r.item,local=localizedItem(i);return `<article class="variantCard" data-product-id="${r.id}"><button type="button" class="photo productPhoto productImageButton" data-gallery-id="${r.id}" aria-label="${escapeHtml(ui().zoom)}"><img src="${i[3]}" alt="${escapeHtml(local.name)}" loading="lazy"></button><h3>${escapeHtml(local.name)}</h3><div class="variantSize">${escapeHtml(local.size)}</div><div class="variantPrice">${escapeHtml(localizedPrice(i))}</div><button type="button" class="cartBtn"><span aria-hidden="true">🛒</span> ${ui().add}</button></article>`}).join('');revealCards()}
 function showCategories(scroll=false){activeCategory=null;searchTerm='';document.querySelectorAll('.search input,.mobileSearch input').forEach(input=>input.value='');catPage.classList.remove('active');catHome.classList.add('active');searchStatus.textContent='';history.replaceState(null,'','#products');revealCards();if(scroll)catHome.scrollIntoView({behavior:'smooth',block:'start'})}
 function openCategory(key,scroll=true){if(!catalogData[key])return;activeCategory=key;searchTerm='';document.querySelectorAll('.search input,.mobileSearch input').forEach(input=>input.value='');catHome.classList.remove('active');catPage.classList.add('active');catTitle.textContent=categoryTitles[key][currentLanguage()];searchStatus.textContent='';renderProductCards(productRecords.filter(r=>r.key===key));history.replaceState(null,'','#products/'+key);if(scroll)catPage.scrollIntoView({behavior:'smooth',block:'start'})}

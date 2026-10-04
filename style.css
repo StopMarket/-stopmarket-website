@@ -170,8 +170,9 @@ footer a[href^="tel:"]{color:#ffd400!important;text-decoration:none;font-weight:
 .variantSize{line-height:1.6;overflow-wrap:anywhere}
 .variantPrice{margin-top:auto;padding-top:6px}
 .variantCard .cartBtn{min-height:48px;line-height:1.35}
-.reveal{opacity:0;transform:translateY(24px);transition:opacity .55s ease var(--reveal-delay,0ms),transform .55s ease var(--reveal-delay,0ms)}
-.reveal.revealed{opacity:1;transform:translateY(0)}
+.categoryCard.reveal,.variantCard.reveal{opacity:0;transform:translate3d(0,38px,0)}
+.categoryCard.reveal.revealed,.variantCard.reveal.revealed{animation:cardRise .75s cubic-bezier(.22,1,.36,1) var(--reveal-delay,0ms) both}
+@keyframes cardRise{from{opacity:0;transform:translate3d(0,38px,0)}to{opacity:1;transform:translate3d(0,0,0)}}
 .categoryCard.revealed:hover{transform:translateY(-2px)}
 .top{gap:14px}
 .top .search{min-width:110px}
@@ -186,4 +187,4 @@ button:focus-visible,a:focus-visible{outline:3px solid #111;outline-offset:3px}
 @media(min-width:801px) and (max-width:1050px){.variantGrid{grid-template-columns:repeat(3,minmax(0,1fr))}.top{padding:0 3vw}}
 @media(max-width:800px){.top{gap:5px}.top .brand{font-size:24px}.catalogPage{scroll-margin-top:86px}.variantGrid{grid-template-columns:repeat(2,minmax(0,1fr))}.categoryGrid{grid-template-columns:repeat(2,minmax(0,1fr))}.variantCard h3{font-size:16px;min-height:0}.variantCard .cartBtn{font-size:14px}.categoryCard h3{overflow-wrap:anywhere;line-height:1.4}.top .mobileSearchBtn{min-height:40px}.mobileSearch input{font-size:16px}.headerLangBtn{min-height:36px}}
 @media(max-width:390px){.top{padding:0 8px;gap:4px}.top .brand{font-size:21px}.top .brand b{padding:4px 6px}.wrap{padding:30px 14px}.variantGrid,.categoryGrid{gap:10px}.variantCard{padding:9px}.variantCard .cartBtn{font-size:13px;padding:10px 5px}.variantCard .cartBtn span{display:none}.variantPrice{font-size:19px}.top .menu{margin-right:0;padding:3px}.headerLangBtn{min-width:34px}.headerCartBtn{width:33px}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reveal{opacity:1;transform:none;transition:none}.categoryCard{transition:none}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.categoryCard.reveal,.variantCard.reveal,.categoryCard.reveal.revealed,.variantCard.reveal.revealed{opacity:1;transform:none;transition:none;animation:none}.categoryCard{transition:none}}
