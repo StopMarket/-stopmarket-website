@@ -188,3 +188,8 @@ button:focus-visible,a:focus-visible{outline:3px solid #111;outline-offset:3px}
 @media(max-width:800px){.top{gap:5px}.top .brand{font-size:24px}.catalogPage{scroll-margin-top:86px}.variantGrid{grid-template-columns:repeat(2,minmax(0,1fr))}.categoryGrid{grid-template-columns:repeat(2,minmax(0,1fr))}.variantCard h3{font-size:16px;min-height:0}.variantCard .cartBtn{font-size:14px}.categoryCard h3{overflow-wrap:anywhere;line-height:1.4}.top .mobileSearchBtn{min-height:40px}.mobileSearch input{font-size:16px}.headerLangBtn{min-height:36px}}
 @media(max-width:390px){.top{padding:0 8px;gap:4px}.top .brand{font-size:21px}.top .brand b{padding:4px 6px}.wrap{padding:30px 14px}.variantGrid,.categoryGrid{gap:10px}.variantCard{padding:9px}.variantCard .cartBtn{font-size:13px;padding:10px 5px}.variantCard .cartBtn span{display:none}.variantPrice{font-size:19px}.top .menu{margin-right:0;padding:3px}.headerLangBtn{min-width:34px}.headerCartBtn{width:33px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.categoryCard.reveal,.variantCard.reveal,.categoryCard.reveal.revealed,.variantCard.reveal.revealed{opacity:1;transform:none;transition:none;animation:none}.categoryCard{transition:none}}
+
+/* v43: long category titles on small phones. */
+.categoryGrid{grid-template-columns:repeat(3,minmax(0,1fr))}.categoryCard{min-width:0}.categoryCard h3{overflow-wrap:anywhere;line-height:1.4}.categoryCard .productPhoto img{max-width:100%}
+@media(max-width:800px){.categoryGrid{grid-template-columns:repeat(2,minmax(0,1fr))}.categoryCard h3{font-size:16px}.variantCard h3{overflow-wrap:anywhere}}
+@media(max-width:390px){.categoryCard h3{font-size:14px}}
