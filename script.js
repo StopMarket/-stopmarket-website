@@ -20,11 +20,11 @@ document.querySelectorAll('.top .brand').forEach(a=>a.addEventListener('click',(
 const catalogData={
  cones:{title:'Ճանապարհային կոններ',items:[['Ճանապարհային կոն 45 սմ','45 սմ','Գինը՝ ճշտել','https://images.tcdn.com.br/img/img_prod/1247987/cone_de_sinalizao_75_cm_base_de_borracha_faixa_1_20251103135210_14ba19d09f11.png'],['Ճանապարհային կոն 75 սմ','75 սմ','5,500 ֏','https://images.tcdn.com.br/img/img_prod/1247987/cone_de_sinalizao_75_cm_base_de_borracha_faixa_1_20251103135210_14ba19d09f11.png'],['Ճանապարհային կոն 90 սմ','90 սմ','Գինը՝ ճշտել','https://images.tcdn.com.br/img/img_prod/1247987/cone_de_sinalizao_75_cm_base_de_borracha_faixa_1_20251103135210_14ba19d09f11.png']]},
  bumps:{title:'Արհեստական անհարթություններ',items:[
- ['Արհեստական անհարթություն','Երկարություն՝ 1.90 մ • Լայնություն՝ 32 սմ • Բարձրություն՝ 5 սմ','32,000 ֏','https://www.webstaurantstore.com/images/products/large/715859/2499085.jpg'],
- ['Արհեստական անհարթություն','Երկարություն՝ 50 սմ • Լայնություն՝ 35 սմ • Բարձրություն՝ 5 սմ','11,000 ֏','https://cpimg.tistatic.com/9950361/b/4/rubber-speed-breaker..jpg'],
- ['Արհեստական անհարթություն','Երկարություն՝ 1 մ • Լայնություն՝ 33 սմ • Բարձրություն՝ 5 սմ','14,000 ֏','https://www.ys-traffic.com/ys-traffic/2024/03/07/2-1.jpg'],
- ['Արհեստական անհարթություն','Երկարություն՝ 1 մ • Լայնություն՝ 30 սմ • Բարձրություն՝ 6 սմ','21,000 ֏','https://www.adourbanfurniture.com/wp-content/uploads/speed-bump-band15.jpg'],
- ['Արհեստական անհարթություն','Երկարություն՝ 1 մ • Լայնություն՝ 15 սմ • Բարձրություն՝ 2.5 սմ','9,500 ֏','https://www.allroadsafety.com/uploadfile/2014/0711/20140711054444876.jpg']
+ ["Արհեստական անհարթություն", "Երկարություն՝ 50 սմ • Լայնություն՝ 35 սմ • Բարձրություն՝ 5 սմ", "12,000 ֏", "images/bumps/01-main.webp", ["images/bumps/01-main.webp", "images/bumps/01-detail-2.webp", "images/bumps/01-detail-3.jpeg"]],
+ ["Արհեստական անհարթություն", "Երկարություն՝ 1.83 մ • Լայնություն՝ 32 սմ • Բարձրություն՝ 5 սմ", "32,000 ֏", "images/bumps/02-main.webp", ["images/bumps/02-main.webp"]],
+ ["Արհեստական անհարթություն", "Երկարություն՝ 1 մ • Լայնություն՝ 33 սմ • Բարձրություն՝ 5 սմ", "14,000 ֏", "images/bumps/03-main.webp", ["images/bumps/03-main.webp"]],
+ ["Արհեստական անհարթություն", "Երկարություն՝ 1 մ • Լայնություն՝ 15 սմ • Բարձրություն՝ 2.5 սմ", "9,500 ֏", "images/bumps/04-main.jpeg", ["images/bumps/04-main.jpeg"]],
+ ["Արհեստական անհարթություն", "Երկարություն՝ 1 մ • Լայնություն՝ 30 սմ • Բարձրություն՝ 6 սմ", "21,000 ֏", "images/bumps/05-main.webp", ["images/bumps/05-main.webp"]]
  ]},
  mirrors:{title:'Կլոր հայելիներ',items:[['Կլոր հայելի','45 սմ','Գինը՝ ճշտել','https://cdn.hoffmann-group.com/derivatives/3268512/jpg_1200/jpg_1200_b994454_60.jpg'],['Կլոր հայելի','60 սմ','Գինը՝ ճշտել','https://cdn.hoffmann-group.com/derivatives/3268512/jpg_1200/jpg_1200_b994454_60.jpg'],['Կլոր հայելի','80 սմ','Գինը՝ ճշտել','https://cdn.hoffmann-group.com/derivatives/3268512/jpg_1200/jpg_1200_b994454_60.jpg'],['Կլոր հայելի','100 սմ','Գինը՝ ճշտել','https://cdn.hoffmann-group.com/derivatives/3268512/jpg_1200/jpg_1200_b994454_60.jpg']]},
  posts:{title:'Ճկուն սյունիկներ',items:[['Ճկուն սյունիկ','75 սմ','7,500 ֏','https://www.newbollardsdirect.co.uk/user/products/large/TL.Flexpin%201000_2%20RW.png'],['Ճկուն սյունիկ','100 սմ','Գինը՝ ճշտել','https://www.newbollardsdirect.co.uk/user/products/large/TL.Flexpin%201000_2%20RW.png']]},
@@ -32,7 +32,7 @@ const catalogData={
  concrete:{title:'Բետոնե կիսագնդեր',items:[['Բետոնե կիսագունդ','Ø 50 սմ × 35 սմ','Գինը՝ ճշտել','concrete-hemisphere.jpg']]}
 };
 const catHome=document.querySelector('[data-page="categories"]'),catPage=document.querySelector('[data-page="category"]'),variantGrid=document.querySelector('.variantGrid'),catTitle=document.querySelector('.categoryPageTitle');
-function openCategory(key){const c=catalogData[key];if(!c)return;catTitle.textContent=c.title;variantGrid.innerHTML=c.items.map(i=>`<article class="variantCard"><div class="photo productPhoto"><img src="${i[3]}" alt="${i[0]}"></div><h3>${i[0]}</h3><div class="variantSize">Չափ՝ ${i[1]}</div><div class="variantPrice">${i[2]}</div><button class="cartBtn"><span>🛒</span> Ավելացնել զամբյուղ</button></article>`).join('');catHome.classList.remove('active');catPage.classList.add('active');catPage.scrollIntoView({behavior:'smooth',block:'start'});history.replaceState(null,'','#products/'+key)}
+function openCategory(key){const c=catalogData[key];if(!c)return;catTitle.textContent=c.title;variantGrid.innerHTML=c.items.map((i,index)=>`<article class="variantCard">${key==='bumps'?`<button type="button" class="photo productPhoto productImageButton" data-gallery-index="${index}" aria-label="Մեծացնել ապրանքի նկարը"><img src="${i[3]}" alt="${i[0]}"></button>`:`<div class="photo productPhoto"><img src="${i[3]}" alt="${i[0]}"></div>`}<h3>${i[0]}</h3><div class="variantSize">Չափ՝ ${i[1]}</div><div class="variantPrice">${i[2]}</div><button class="cartBtn"><span>🛒</span> Ավելացնել զամբյուղ</button></article>`).join('');catHome.classList.remove('active');catPage.classList.add('active');catPage.scrollIntoView({behavior:'smooth',block:'start'});history.replaceState(null,'','#products/'+key)}
 document.querySelectorAll('.categoryCard').forEach(b=>b.addEventListener('click',()=>openCategory(b.dataset.category)));
 document.querySelector('.categoryBack')?.addEventListener('click',()=>{catPage.classList.remove('active');catHome.classList.add('active');history.replaceState(null,'','#products');catHome.scrollIntoView({behavior:'smooth',block:'start'})});
 
@@ -132,3 +132,27 @@ checkoutForm?.addEventListener('submit',async e=>{
   }
 
 });
+
+// v41: product image viewer; galleries open only after clicking the card image.
+const imageViewer=document.createElement('dialog');
+imageViewer.className='imageViewer';
+imageViewer.setAttribute('aria-label','Ապրանքի նկարներ');
+imageViewer.innerHTML='<div class="imageViewerBox"><button type="button" class="imageViewerClose" aria-label="Փակել">×</button><div class="imageViewerStage"><button type="button" class="imageViewerPrev" aria-label="Նախորդ նկար">‹</button><img class="imageViewerPhoto" alt=""><button type="button" class="imageViewerNext" aria-label="Հաջորդ նկար">›</button></div><div class="imageViewerCounter" aria-live="polite"></div></div>';
+document.body.append(imageViewer);
+const viewerPhoto=imageViewer.querySelector('.imageViewerPhoto');
+const viewerPrev=imageViewer.querySelector('.imageViewerPrev');
+const viewerNext=imageViewer.querySelector('.imageViewerNext');
+let viewerImages=[],viewerIndex=0,viewerScroll='',viewerFocus=null;
+function renderViewer(){viewerPhoto.src=viewerImages[viewerIndex];viewerPhoto.alt=`Արհեստական անհարթություն — նկար ${viewerIndex+1}`;imageViewer.querySelector('.imageViewerCounter').textContent=`${viewerIndex+1} / ${viewerImages.length}`;viewerPrev.hidden=viewerNext.hidden=viewerImages.length<2;}
+function stepViewer(step){viewerIndex=(viewerIndex+step+viewerImages.length)%viewerImages.length;renderViewer();}
+function closeImageViewer(){imageViewer.close();}
+variantGrid.addEventListener('click',event=>{const button=event.target.closest('[data-gallery-index]');if(!button)return;const item=catalogData.bumps.items[Number(button.dataset.galleryIndex)];viewerImages=item[4]||[item[3]];viewerIndex=0;viewerFocus=button;renderViewer();viewerScroll=document.body.style.overflow;document.body.style.overflow='hidden';imageViewer.showModal();imageViewer.querySelector('.imageViewerClose').focus();});
+viewerPrev.addEventListener('click',()=>stepViewer(-1));
+viewerNext.addEventListener('click',()=>stepViewer(1));
+imageViewer.querySelector('.imageViewerClose').addEventListener('click',closeImageViewer);
+imageViewer.addEventListener('click',event=>{if(event.target===imageViewer)closeImageViewer();});
+imageViewer.addEventListener('close',()=>{document.body.style.overflow=viewerScroll;viewerFocus?.focus();});
+imageViewer.addEventListener('keydown',event=>{if(event.key==='ArrowLeft'){event.preventDefault();stepViewer(-1);}if(event.key==='ArrowRight'){event.preventDefault();stepViewer(1);}});
+let swipeStart=null;
+viewerPhoto.addEventListener('touchstart',event=>{const touch=event.touches.length===1?event.touches[0]:null;swipeStart=touch?{x:touch.clientX,y:touch.clientY}:null;},{passive:true});
+viewerPhoto.addEventListener('touchend',event=>{if(!swipeStart)return;const touch=event.changedTouches[0],dx=touch.clientX-swipeStart.x,dy=touch.clientY-swipeStart.y;swipeStart=null;if(Math.abs(dx)>45&&Math.abs(dx)>Math.abs(dy)*1.5&&viewerImages.length>1)stepViewer(dx<0?1:-1);},{passive:true});
