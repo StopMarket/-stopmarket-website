@@ -14,7 +14,16 @@ function syncHeaderLang(){if(headerLangBtn) headerLangBtn.textContent=langLabels
 if(headerLangBtn){headerLangBtn.addEventListener('click',()=>{const current=document.documentElement.lang||'hy';const next=langOrder[(langOrder.indexOf(current)+1)%langOrder.length];lang(next);syncHeaderLang()});syncHeaderLang()}
 
 // v31: logo returns to top; delivery links already target #delivery; phone links use tel:
-document.querySelectorAll('.top .brand').forEach(a=>a.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'})));
+// v44: the brand returns from category/search views to the home page.
+document.querySelectorAll('.top .brand').forEach(a=>a.addEventListener('click',event=>{
+ event.preventDefault();
+ showCategories(false);
+ mobileMenu?.classList.remove('open');
+ menuBtn?.setAttribute('aria-expanded','false');
+ ms?.classList.remove('open');
+ history.replaceState(null,'','#top');
+ window.scrollTo({top:0,behavior:'smooth'});
+}));
 
 // v32: category-first product catalog. Product codes intentionally removed.
 const catalogData={

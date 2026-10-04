@@ -193,3 +193,11 @@ button:focus-visible,a:focus-visible{outline:3px solid #111;outline-offset:3px}
 .categoryGrid{grid-template-columns:repeat(3,minmax(0,1fr))}.categoryCard{min-width:0}.categoryCard h3{overflow-wrap:anywhere;line-height:1.4}.categoryCard .productPhoto img{max-width:100%}
 @media(max-width:800px){.categoryGrid{grid-template-columns:repeat(2,minmax(0,1fr))}.categoryCard h3{font-size:16px}.variantCard h3{overflow-wrap:anywhere}}
 @media(max-width:390px){.categoryCard h3{font-size:14px}}
+
+/* v44: official Evelux Tech logo on desktop and mobile. */
+.eveluxLogo{display:flex;align-items:center;justify-content:center;min-width:0;background:#fff;border-radius:12px;padding:18px}.eveluxLogo img{display:block;width:min(100%,300px);height:auto;object-fit:contain}
+@media(max-width:800px){.eveluxLogo{max-width:100%;padding:14px}.eveluxLogo img{width:min(100%,240px)}}
+
+/* v44: Instagram under the email in the footer, on every screen. */
+.footerInstagram{display:inline-flex;align-items:center;gap:8px;color:#ffd400;text-decoration:none;font-weight:700;margin:8px 0;vertical-align:middle}
+.footerInstagram svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.8;flex:none}.footerInstagram .instagramDot{fill:currentColor;stroke:none}.footerInstagram:hover{text-decoration:underline}.footerInstagram:focus-visible{outline:2px solid #ffd400;outline-offset:4px;border-radius:3px}
