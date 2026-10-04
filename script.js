@@ -53,4 +53,82 @@ function orderText(){const total=cart.reduce((n,x)=>n+moneyNumber(x.price)*x.qty
 function openCheckout(){if(!cart.length){cartDrawer?.classList.add('open');cartDrawer?.setAttribute('aria-hidden','false');if(orderStatus)orderStatus.textContent='';return}cartDrawer?.classList.remove('open');cartDrawer?.setAttribute('aria-hidden','true');checkoutSummary.innerHTML='<h3>Ձեր պատվերը</h3>'+cart.map(x=>`<div class="checkoutLine"><span>${x.name} × ${x.qty}</span><b>${x.price}</b></div>`).join('');orderDetails.value=orderText();orderStatus.textContent='';checkoutModal.classList.add('open');checkoutModal.setAttribute('aria-hidden','false')}
 function closeCheckout(){checkoutModal?.classList.remove('open');checkoutModal?.setAttribute('aria-hidden','true')}
 document.querySelector('.checkoutBtn')?.addEventListener('click',openCheckout);document.querySelector('.menuOrder')?.addEventListener('click',e=>{e.preventDefault();mobileMenu?.classList.remove('open');openCheckout()});document.querySelector('.checkoutClose')?.addEventListener('click',closeCheckout);checkoutModal?.addEventListener('click',e=>{if(e.target===checkoutModal)closeCheckout()});
-checkoutForm?.addEventListener('submit',async e=>{e.preventDefault();if(!cart.length)return;const btn=checkoutForm.querySelector('.submitOrderBtn');btn.disabled=true;btn.textContent='Ուղարկվում է…';orderDetails.value=orderText();try{const fd=new FormData(checkoutForm);const r=await fetch('https://formsubmit.co/ajax/stopmarketllc@gmail.com',{method:'POST',headers:{'Accept':'application/json'},body:fd});if(!r.ok)throw new Error('send');orderStatus.textContent='Շնորհակալություն։ Ձեր պատվերն ընդունված է։ Մենք շուտով կկապվենք Ձեզ հետ։';orderStatus.classList.add('success');cart=[];saveCart();checkoutForm.reset();setTimeout(closeCheckout,2200)}catch(err){orderStatus.textContent='Չհաջողվեց ուղարկել պատվերը։ Խնդրում ենք փորձել կրկին կամ զանգահարել +374 41 03 30 03։';orderStatus.classList.remove('success')}finally{btn.disabled=false;btn.textContent='Հաստատել պատվերը'}});
+checkoutForm?.addEventListener('submit',async e=>{
+
+  e.preventDefault();
+
+  if(!cart.length)return;
+
+  const btn=checkoutForm.querySelector('.submitOrderBtn');
+
+  btn.disabled=true;
+
+  btn.textContent='Ուղարկվում է…';
+
+  orderDetails.value=orderText();
+
+  try{
+
+    const fd=new FormData(checkoutForm);
+
+    const data={
+
+      orderNo:'SM-'+Date.now(),
+
+      name:fd.get('name')||'',
+
+      email:fd.get('email')||'',
+
+      phone:fd.get('phone')||'',
+
+      address:fd.get('address')||'',
+
+      comment:fd.get('comment')||'',
+
+      order:orderText()
+
+    };
+
+    const r=await fetch('/api/order',{
+
+      method:'POST',
+
+      headers:{'Content-Type':'application/json'},
+
+      body:JSON.stringify(data)
+
+    });
+
+    const result=await r.json();
+
+    if(!r.ok)throw new Error(result.error||'send');
+
+    orderStatus.textContent='Շնորհակալություն։ Ձեր պատվերն ընդունված է։ Մենք շուտով կկապվենք Ձեզ հետ։';
+
+    orderStatus.classList.add('success');
+
+    cart=[];
+
+    saveCart();
+
+    checkoutForm.reset();
+
+    setTimeout(closeCheckout,2200);
+
+  }catch(err){
+
+    console.error(err);
+
+    orderStatus.textContent='Չհաջողվեց ուղարկել պատվերը։ Խնդրում ենք փորձել կրկին կամ զանգահարել +374 41 03 30 03։';
+
+    orderStatus.classList.remove('success');
+
+  }finally{
+
+    btn.disabled=false;
+
+    btn.textContent='Հաստատել պատվերը';
+
+  }
+
+});
