@@ -24,6 +24,30 @@ function esc(v){
 
 }
 
+// A durable shared counter starts at 1 and survives deployments.
+async function nextOrderNumber(fallback) {
+  const url = process.env.UPSTASH_REDIS_REST_URL;
+  const token = process.env.UPSTASH_REDIS_REST_TOKEN;
+  if (!url || !token) return fallback;
+  try {
+    const response = await fetch(url.replace(/\/$/, ''), {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify(['INCR', 'stopmarket:orders:sequence:v1']),
+      signal: AbortSignal.timeout(5000)
+    });
+    const data = await response.json();
+    if (!response.ok || data.error || !Number.isSafeInteger(data.result) || data.result < 1) {
+      throw new Error('Order counter unavailable');
+    }
+    return String(data.result).padStart(4, '0');
+  } catch {
+    // Email orders remain available during a counter outage.
+    console.error('Order counter unavailable; retaining unique order reference');
+    return fallback;
+  }
+}
+
 module.exports = async function handler(req, res) {
 
   if (req.method !== 'POST') {
@@ -44,7 +68,7 @@ module.exports = async function handler(req, res) {
 
   const body = req.body || {};
 
-  const orderNo = clean(body.orderNo, 80);
+  let orderNo = clean(body.orderNo, 80);
 
   const name = clean(body.name, 120);
 
@@ -84,6 +108,10 @@ module.exports = async function handler(req, res) {
 
   });
 
+  try {
+    await transporter.verify();
+    orderNo = await nextOrderNumber(orderNo);
+
   const sellerText =
 
 `Նոր պատվեր ${orderNo}
@@ -100,67 +128,20 @@ ${comment ? `Մեկնաբանություն՝ ${comment}\n` : ''}
 
 ${order}`;
 
-  const customerText =
-
-`Շնորհակալություն Ձեր պատվերի համար։
-
-Ձեր պատվերը հաջողությամբ ընդունվել է Stop Market-ի կողմից։
-
-Պատվեր № ${orderNo}
-
-${order}
-
-Մեր աշխատակիցը շուտով կկապվի Ձեզ հետ պատվերը հաստատելու և առաքումը համաձայնեցնելու համար։
-
-Stop Market
-
-+374 41 03 30 03
-
-stopmarket.am`;
-
+  const deliveryNote = 'Երևանի տարածքում մինչև 30 000 դրամի պատվերների առաքումն արժե 2 000 դրամ։';
+  const customerText = `Շնորհակալություն Ձեր պատվերի համար։\n\nՊատվեր № ${orderNo}\n\nՄեր աշխատակիցը շուտով կկապվի Ձեզ հետ։\n\n${deliveryNote}`;
   const customerHtml = `
-
   <div style="font-family:Arial,sans-serif;max-width:640px;margin:auto;border:1px solid #eee;border-radius:14px;overflow:hidden">
-
     <div style="background:#ffd400;padding:18px 24px;font-size:24px;font-weight:700">
-
       <span style="background:#111;color:#ffd400;padding:5px 9px;border-radius:6px">Stop</span> Market
-
     </div>
-
-    <div style="padding:24px;color:#111">
-
-      <h2 style="margin-top:0">Շնորհակալություն Ձեր պատվերի համար</h2>
-
-      <p>Ձեր պատվերը հաջողությամբ ընդունվել է։</p>
-
+    <div style="padding:24px;color:#111;line-height:1.6">
+      <h2 style="margin-top:0;font-size:22px">Շնորհակալություն Ձեր պատվերի համար</h2>
       <p><b>Պատվեր № ${esc(orderNo)}</b></p>
-
-      <pre style="white-space:pre-wrap;background:#f7f7f7;padding:14px;border-radius:10px;font-family:Arial,sans-serif">${esc(order)}</pre>
-
-      <p>
-
-        Մեր աշխատակիցը շուտով կկապվի Ձեզ հետ պատվերը հաստատելու և առաքումը համաձայնեցնելու համար։
-
-      </p>
-
-      <p style="margin-bottom:0">
-
-        <b>Stop Market</b><br>
-
-        +374 41 03 30 03<br>
-
-        stopmarket.am
-
-      </p>
-
+      <p>Մեր աշխատակիցը շուտով կկապվի Ձեզ հետ։</p>
+      <p style="margin:24px 0 0;font-size:13px;color:#666">${deliveryNote}</p>
     </div>
-
   </div>`;
-
-  try {
-
-    await transporter.verify();
 
     await Promise.all([
 
