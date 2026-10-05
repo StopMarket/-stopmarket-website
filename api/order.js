@@ -129,7 +129,7 @@ ${comment ? `Մեկնաբանություն՝ ${comment}\n` : ''}
 ${order}`;
 
   const deliveryNote = 'Երևանի տարածքում մինչև 30 000 դրամի պատվերների առաքումն արժե 2 000 դրամ։';
-  const customerText = `Շնորհակալություն Ձեր պատվերի համար։\n\nՊատվեր № ${orderNo}\n\nՄեր աշխատակիցը շուտով կկապվի Ձեզ հետ։\n\n${deliveryNote}`;
+  const customerText = `Շնորհակալություն Ձեր պատվերի համար։\n\nՊատվեր № ${orderNo}\n\nՄեր աշխատակիցը շուտով կկապվի Ձեզ հետ։\n\n${deliveryNote}\n\nStop Market\n+374 41 03 30 03\nhttps://stopmarket.am`;
   const customerHtml = `
   <div style="font-family:Arial,sans-serif;max-width:640px;margin:auto;border:1px solid #eee;border-radius:14px;overflow:hidden">
     <div style="background:#ffd400;padding:18px 24px;font-size:24px;font-weight:700">
@@ -140,6 +140,7 @@ ${order}`;
       <p><b>Պատվեր № ${esc(orderNo)}</b></p>
       <p>Մեր աշխատակիցը շուտով կկապվի Ձեզ հետ։</p>
       <p style="margin:24px 0 0;font-size:13px;color:#666">${deliveryNote}</p>
+      <p style="margin:24px 0 0"><b>Stop Market</b><br><a href="tel:+37441033003" style="color:inherit;text-decoration:none">+374 41 03 30 03</a><br><a href="https://stopmarket.am">stopmarket.am</a></p>
     </div>
   </div>`;
 
