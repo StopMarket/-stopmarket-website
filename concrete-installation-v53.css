@@ -1,0 +1,19 @@
+/* Equal-sized stacked images in the concrete hemisphere section. */
+.concreteImages{display:grid;gap:20px;width:100%;min-width:0}
+.concreteImages .concretePhoto{
+  position:relative;
+  width:100% !important;
+  height:auto !important;
+  aspect-ratio:1 / 1 !important;
+}
+.concreteImages .concretePhoto img{
+  position:absolute;
+  inset:0;
+  width:100% !important;
+  height:100% !important;
+  object-fit:contain !important;
+}
+.concreteImages .concreteInstallationPhoto img{
+  object-fit:cover !important;
+  object-position:center 40% !important;
+}
