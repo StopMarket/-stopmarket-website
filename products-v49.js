@@ -14,7 +14,7 @@ if(!catalogData.bumps.items.some(i=>i[0]===data.cable[0])){
  const index=catalogData.bumps.items.length;catalogData.bumps.items.push(data.cable);
  productRecords.push({id:'v49:cable',key:'bumps',index,item:data.cable});
 }
-const mainPhotos={cones:data.cones[0][3],posts:'sm49-A93FF5D8-C1FB-4F24-B032-497D44E38F94.png'};
+const mainPhotos={cones:'sm49-IMG_6024.webp',posts:'sm49-A93FF5D8-C1FB-4F24-B032-497D44E38F94.png'};
 for(const [key,src]of Object.entries(mainPhotos)){
  const img=document.querySelector('.categoryCard[data-category="'+key+'"] img');if(img)img.src=src;
 }
