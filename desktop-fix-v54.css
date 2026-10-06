@@ -2,32 +2,39 @@
 .desktopAbout,.concreteDesktopContact{display:none}
 @media(min-width:801px){
   .nav .desktopAbout{display:inline-block}
-  .concrete{
+  .marking,.concrete{
+    --photo-height:clamp(260px,22vw,320px);
     display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
-    align-items:stretch;padding:0;gap:0;min-height:430px;
+    align-items:stretch;padding:0;gap:0;min-height:0;
     background:#10151d;color:#fff;overflow:hidden;
   }
-  .concrete>div:first-child{min-width:0;padding:70px 8%;align-self:stretch}
-  .concrete h2{font-size:36px;margin-top:.83em}
-  .concrete p{line-height:1.7;color:#ddd}
+  .marking{height:var(--photo-height)}
+  .marking .markingText,.concrete>div:first-child{
+    min-width:0;padding:40px 8%;align-self:stretch;
+  }
+  .marking .markingText h2,.concrete h2{
+    font-size:clamp(26px,2.3vw,36px);margin:0 0 20px;
+  }
+  .marking .markingText p,.concrete p{
+    line-height:1.7;color:#ddd;margin:0;
+  }
+  .marking .markingText a{display:none}
   .concrete .concreteDesktopContact{
     display:inline-block;background:#ffd400;color:#111;
     text-decoration:none;padding:14px 22px;font-weight:800;margin-top:15px;
   }
   .concrete .concreteImages{
-    display:grid;grid-template-rows:repeat(2,minmax(0,1fr));
+    display:grid;grid-template-rows:repeat(2,var(--photo-height));
     gap:0;min-width:0;align-self:stretch;
   }
-  .concrete .concreteImages .concretePhoto{
-    position:relative;width:100% !important;height:100% !important;
-    min-height:215px !important;aspect-ratio:auto !important;
+  .marking .markingVisual,.concrete .concreteImages .concretePhoto{
+    position:relative;width:100% !important;height:var(--photo-height) !important;
+    min-height:0 !important;aspect-ratio:auto !important;
     border-radius:0 !important;background:#10151d !important;overflow:hidden !important;
   }
-  .concrete .concreteImages .concretePhoto img{
-    position:absolute;inset:0;width:100% !important;height:100% !important;
-    object-fit:cover !important;object-position:center !important;display:block;
-  }
+  .marking .markingVisual img,.concrete .concreteImages .concretePhoto img,
   .concrete .concreteImages .concreteInstallationPhoto img{
-    object-position:center 40% !important;
+    position:absolute;inset:0;width:100% !important;height:100% !important;
+    object-fit:contain !important;object-position:center !important;display:block;
   }
 }
