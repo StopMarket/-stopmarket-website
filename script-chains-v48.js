@@ -254,6 +254,9 @@ document.querySelector('.mobileSearchGo')?.addEventListener('click',()=>searchPr
 document.querySelectorAll('a[href="#products"]').forEach(link=>link.addEventListener('click',event=>{event.preventDefault();showCategories(true)}));
 const doorVideo=document.querySelector('.doorVideo');
 if(doorVideo&&!window.matchMedia('(prefers-reduced-motion: reduce)').matches){doorVideo.muted=true;doorVideo.play().catch(()=>{document.addEventListener('pointerdown',()=>doorVideo.play().catch(()=>{}),{once:true})})}
+Object.assign(t.hy,{"serviceParking":"Կայանատեղիներ","serviceRoads":"Ճանապարհներ","serviceCrossings":"Անցումներ","discussProject":"Քննարկենք ձեր նախագիծը","benefitBoundary":"Տարածքների սահմանազատում","benefitParking":"Կայանման կարգավորում","benefitInstall":"Տեղադրման ծառայություն"});
+Object.assign(t.ru,{"serviceParking":"Парковки","serviceRoads":"Дороги","serviceCrossings":"Переходы","discussProject":"Обсудим ваш проект","benefitBoundary":"Разграничение территорий","benefitParking":"Организация парковки","benefitInstall":"Услуга установки"});
+Object.assign(t.en,{"serviceParking":"Parking lots","serviceRoads":"Roads","serviceCrossings":"Crossings","discussProject":"Let’s discuss your project","benefitBoundary":"Boundary marking","benefitParking":"Parking management","benefitInstall":"Installation service"});
 lang(currentLanguage());
 history.replaceState({...(history.state||{}),stopMarketRoute:true},'',location.href);
 function restoreStoreRoute(){

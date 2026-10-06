@@ -1,0 +1,22 @@
+/* Approved service-section design, desktop and mobile. */
+.marking,.concrete{background:#10151d;color:#fff;padding:0;gap:0;align-items:stretch;min-height:0;overflow:hidden}
+.marking .markingText,.concrete>div:first-child{box-sizing:border-box;min-width:0;padding:36px 8%;position:relative;display:flex;flex-direction:column;justify-content:center}
+.marking .markingText h2,.concrete h2{font-size:clamp(25px,2.25vw,36px);line-height:1.3;margin:0 0 18px}
+.marking .markingText p,.concrete p{line-height:1.7;color:#ddd;margin:0}
+.markingServices{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:22px 0 18px}
+.markingService{border:1px solid #303944;border-radius:10px;padding:18px 5px;text-align:center;min-width:0}
+.markingService svg{display:block;width:64px;height:64px;color:#ffd400;margin:0 auto 12px}
+.markingService span{font-size:clamp(12px,1.05vw,17px);font-weight:700}
+.marking .markingText .projectContact{display:inline-flex;align-items:center;gap:10px;align-self:flex-start;margin:0;padding:0 0 7px;background:none;color:#ffd400;border-bottom:1px solid #ffd400;text-decoration:none;font-weight:700;line-height:1.5}
+.concreteBenefits{list-style:none;margin:22px 0 24px;padding:0;position:relative;z-index:1}
+.concreteBenefits li{display:flex;align-items:center;gap:14px;margin-bottom:14px;line-height:1.5}
+.concreteBenefits li::before{content:"✓";display:flex;align-items:center;justify-content:center;flex:0 0 25px;height:25px;background:#ffd400;color:#10151d;border-radius:50%;font-weight:800}
+.concrete .concreteDesktopContact{display:inline-block;align-self:flex-start;background:#ffd400;color:#111;text-decoration:none;padding:14px 22px;font-weight:800;margin:0;position:relative;z-index:1}
+.parkingMotif{position:absolute;width:70%;height:auto;right:0;bottom:0;color:#ffd400;opacity:.12;pointer-events:none}
+.concrete .concreteImages{display:block;min-width:0;gap:0}
+.marking .markingVisual,.concrete .concreteImages .concreteInstallationPhoto{position:static;width:100%!important;height:auto!important;min-height:0!important;aspect-ratio:auto!important;border-radius:0!important;background:transparent!important;align-self:start}
+.concrete .concreteImages .concreteInstallationPhoto::before{display:none}
+.concreteInstallationPhoto picture{display:block}
+.marking .markingVisual img,.concrete .concreteImages .concreteInstallationPhoto img{position:static;inset:auto;width:100%!important;height:auto!important;max-width:100%!important;object-fit:contain!important;object-position:center!important;display:block;filter:none}
+@media(min-width:801px){.marking,.concrete{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
+@media(max-width:800px){.marking,.concrete{display:grid;grid-template-columns:minmax(0,1fr)}.marking .markingText,.concrete>div:first-child{padding:32px 24px}.markingServices{gap:9px;margin-top:24px}.markingService{padding:16px 3px}.markingService svg{width:48px;height:48px;margin-bottom:10px}.markingService span{font-size:clamp(10px,3vw,14px)}.marking .markingText .projectContact{font-size:15px}.concreteBenefits li{font-size:15px}.parkingMotif{width:65%}}
