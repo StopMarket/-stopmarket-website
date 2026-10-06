@@ -26,3 +26,9 @@
  .markingService{box-sizing:border-box;padding:16px 7px}
  .markingService span{display:flex;align-items:center;justify-content:center;min-height:2.8em;max-width:100%;font-size:clamp(10px,2.65vw,13px);line-height:1.4;white-space:normal;overflow-wrap:anywhere;word-break:normal}
 }
+
+/* Yellow Evelux section on desktop and phones. */
+#evelux.evelux{background:#ffd400;color:#111;border-color:#ffd400}
+#evelux .eveluxLogo{background:transparent}
+#evelux .eveluxLogo img{mix-blend-mode:multiply}
+#evelux h2,#evelux p{color:#111}
