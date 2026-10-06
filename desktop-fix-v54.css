@@ -1,63 +1,33 @@
-/* Desktop changes only; preserve the current phone layout. */
+/* Keep the existing phone layout. Show original photos naturally on desktop. */
 .desktopAbout,.concreteDesktopContact{display:none}
 @media(min-width:801px){
   .nav .desktopAbout{display:inline-block}
   .marking,.concrete{
-    --photo-height:clamp(260px,22vw,320px);
     display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
-    align-items:stretch;padding:0;gap:0;min-height:0;
+    align-items:start;padding:0;gap:0;min-height:0;height:auto;
     background:#10151d;color:#fff;overflow:hidden;
   }
-  .marking{height:var(--photo-height)}
-  .marking .markingText,.concrete>div:first-child{
-    min-width:0;padding:40px 8%;align-self:stretch;
-  }
+  .marking .markingText,.concrete>div:first-child{min-width:0;padding:40px 8%}
   .marking .markingText h2,.concrete h2{
     font-size:clamp(26px,2.3vw,36px);margin:0 0 20px;
   }
-  .marking .markingText p,.concrete p{
-    line-height:1.7;color:#ddd;margin:0;
-  }
+  .marking .markingText p,.concrete p{line-height:1.7;color:#ddd;margin:0}
   .marking .markingText a{display:none}
   .concrete .concreteDesktopContact{
     display:inline-block;background:#ffd400;color:#111;
     text-decoration:none;padding:14px 22px;font-weight:800;margin-top:15px;
   }
-  .concrete .concreteImages{
-    display:grid;grid-template-rows:repeat(2,var(--photo-height));
-    gap:0;min-width:0;align-self:stretch;
-  }
-  .marking .markingVisual,.concrete .concreteImages .concretePhoto{
-    position:relative;width:100% !important;height:var(--photo-height) !important;
-    min-height:0 !important;aspect-ratio:auto !important;
-    border-radius:0 !important;background:#10151d !important;overflow:hidden !important;
-  }
-  .marking .markingVisual img,.concrete .concreteImages .concretePhoto img,
-  .concrete .concreteImages .concreteInstallationPhoto img{
-    position:absolute;inset:0;width:100% !important;height:100% !important;
-    object-fit:cover !important;object-position:center !important;display:block;
-  }
-}
-
-@media(min-width:801px){
-  .concrete .concreteImages .concreteInstallationPhoto img{object-position:center 55% !important}
-}
-
-/* Two matching desktop rows: marking and installation. */
-@media(min-width:801px){
-  .concrete{height:var(--photo-height)}
-  .concrete .concreteImages{grid-template-rows:var(--photo-height)}
+  .concrete .concreteImages{display:block;min-width:0;gap:0}
   .concrete .concreteImages .concretePhoto:not(.concreteInstallationPhoto){display:none}
-}
-
-/* Preserve the complete installation portrait within the matching frame. */
-@media(min-width:801px){
-  .concrete .concreteImages .concreteInstallationPhoto::before{
-    content:"";position:absolute;inset:-20px;
-    background:url("images/concrete-installation.jpeg") center 55%/cover no-repeat;
-    filter:blur(18px) brightness(.65);pointer-events:none;
+  .marking .markingVisual,.concrete .concreteImages .concreteInstallationPhoto{
+    position:static;width:100% !important;height:auto !important;
+    min-height:0 !important;aspect-ratio:auto !important;
+    border-radius:0 !important;background:transparent !important;
   }
-  .concrete .concreteImages .concreteInstallationPhoto img{
-    object-fit:contain !important;object-position:center !important;
+  .concrete .concreteImages .concreteInstallationPhoto::before{display:none}
+  .marking .markingVisual img,.concrete .concreteImages .concreteInstallationPhoto img{
+    position:static;inset:auto;width:100% !important;height:auto !important;
+    max-width:100% !important;object-fit:contain !important;
+    object-position:center !important;display:block;filter:none;
   }
 }
