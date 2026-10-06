@@ -49,3 +49,15 @@
   .concrete .concreteImages{grid-template-rows:var(--photo-height)}
   .concrete .concreteImages .concretePhoto:not(.concreteInstallationPhoto){display:none}
 }
+
+/* Preserve the complete installation portrait within the matching frame. */
+@media(min-width:801px){
+  .concrete .concreteImages .concreteInstallationPhoto::before{
+    content:"";position:absolute;inset:-20px;
+    background:url("images/concrete-installation.jpeg") center 55%/cover no-repeat;
+    filter:blur(18px) brightness(.65);pointer-events:none;
+  }
+  .concrete .concreteImages .concreteInstallationPhoto img{
+    object-fit:contain !important;object-position:center !important;
+  }
+}
