@@ -20,3 +20,9 @@
 .marking .markingVisual img,.concrete .concreteImages .concreteInstallationPhoto img{position:static;inset:auto;width:100%!important;height:auto!important;max-width:100%!important;object-fit:contain!important;object-position:center!important;display:block;filter:none}
 @media(min-width:801px){.marking,.concrete{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
 @media(max-width:800px){.marking,.concrete{display:grid;grid-template-columns:minmax(0,1fr)}.marking .markingText,.concrete>div:first-child{padding:32px 24px}.markingServices{gap:9px;margin-top:24px}.markingService{padding:16px 3px}.markingService svg{width:48px;height:48px;margin-bottom:10px}.markingService span{font-size:clamp(10px,3vw,14px)}.marking .markingText .projectContact{font-size:15px}.concreteBenefits li{font-size:15px}.parkingMotif{width:65%}}
+
+/* Keep long service labels inside equal phone tiles in every language. */
+@media(max-width:800px){
+ .markingService{box-sizing:border-box;padding:16px 7px}
+ .markingService span{display:flex;align-items:center;justify-content:center;min-height:2.8em;max-width:100%;font-size:clamp(10px,2.65vw,13px);line-height:1.4;white-space:normal;overflow-wrap:anywhere;word-break:normal}
+}
