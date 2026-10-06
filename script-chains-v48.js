@@ -80,11 +80,11 @@ let activeCategory=null,searchTerm='';
 const searchStatus=document.querySelector('.searchStatus');
 const cardMotionReduced=window.matchMedia('(prefers-reduced-motion: reduce)');
 const revealObserver='IntersectionObserver' in window?new IntersectionObserver(entries=>{
+ entries.filter(entry=>!entry.isIntersecting).forEach(entry=>entry.target.classList.remove('revealed'));
  const entering=entries.filter(entry=>entry.isIntersecting).sort((a,b)=>a.boundingClientRect.top-b.boundingClientRect.top||a.boundingClientRect.left-b.boundingClientRect.left);
  entering.forEach((entry,index)=>{
   entry.target.style.setProperty('--reveal-delay',Math.min(index,5)*100+'ms');
   entry.target.classList.add('revealed');
-  revealObserver.unobserve(entry.target);
  });
 },{threshold:0.12,rootMargin:'0px 0px -24px 0px'}):null;
 function revealCards(){
