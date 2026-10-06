@@ -47,3 +47,10 @@
 @media(min-width:801px){
   .concrete .concreteImages .concreteInstallationPhoto img{object-position:center 55% !important}
 }
+
+/* Two matching desktop rows: marking and installation. */
+@media(min-width:801px){
+  .concrete{height:var(--photo-height)}
+  .concrete .concreteImages{grid-template-rows:var(--photo-height)}
+  .concrete .concreteImages .concretePhoto:not(.concreteInstallationPhoto){display:none}
+}
