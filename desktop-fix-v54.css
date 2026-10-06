@@ -1,0 +1,33 @@
+/* Desktop changes only; preserve the current phone layout. */
+.desktopAbout,.concreteDesktopContact{display:none}
+@media(min-width:801px){
+  .nav .desktopAbout{display:inline-block}
+  .concrete{
+    display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+    align-items:stretch;padding:0;gap:0;min-height:430px;
+    background:#10151d;color:#fff;overflow:hidden;
+  }
+  .concrete>div:first-child{min-width:0;padding:70px 8%;align-self:stretch}
+  .concrete h2{font-size:36px;margin-top:.83em}
+  .concrete p{line-height:1.7;color:#ddd}
+  .concrete .concreteDesktopContact{
+    display:inline-block;background:#ffd400;color:#111;
+    text-decoration:none;padding:14px 22px;font-weight:800;margin-top:15px;
+  }
+  .concrete .concreteImages{
+    display:grid;grid-template-rows:repeat(2,minmax(0,1fr));
+    gap:0;min-width:0;align-self:stretch;
+  }
+  .concrete .concreteImages .concretePhoto{
+    position:relative;width:100% !important;height:100% !important;
+    min-height:215px !important;aspect-ratio:auto !important;
+    border-radius:0 !important;background:#10151d !important;overflow:hidden !important;
+  }
+  .concrete .concreteImages .concretePhoto img{
+    position:absolute;inset:0;width:100% !important;height:100% !important;
+    object-fit:cover !important;object-position:center !important;display:block;
+  }
+  .concrete .concreteImages .concreteInstallationPhoto img{
+    object-position:center 40% !important;
+  }
+}
