@@ -47,3 +47,7 @@
  #products .categoryCard::before,#categoryPage .variantCard::before{width:22px;height:22px;border-width:4px}
  .markingService span{display:block;width:100%;white-space:nowrap;overflow-wrap:normal;word-break:normal;font-size:clamp(8px,2.2vw,11px);line-height:2.8;min-height:2.8em;letter-spacing:-.15px}
 }
+
+/* Let the road flow continuously through each listing. */
+#products.catalogPage,#categoryPage.catalogPage{background-size:auto,auto,700px 100%;background-repeat:no-repeat}
+@media(max-width:800px){#products.catalogPage,#categoryPage.catalogPage{background-size:auto,auto,420px 100%}}
