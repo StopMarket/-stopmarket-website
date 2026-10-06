@@ -1,0 +1,26 @@
+/* Tape cards: shared desktop/mobile layout, preserving other catalog styles. */
+.tapeCard{min-width:0;display:flex;flex-direction:column}
+.tapeCard .productPhoto,.tapesCategory .productPhoto{background:#fff!important}
+.tapeCard .productPhoto img,.tapesCategory .productPhoto img{width:100%;height:100%;object-fit:contain!important}
+.tapeCard h3{overflow-wrap:anywhere;line-height:1.35}
+.tapeCard .variantSize{line-height:1.5}
+.tapeCard .variantPrice{margin-top:auto}
+.tapeCard .cartBtn{white-space:normal;line-height:1.3}
+@media(max-width:800px){
+ .tapeCard{padding:10px!important}
+ .tapeCard .productPhoto{height:150px!important}
+ .tapeCard h3{font-size:15px!important;min-height:0}
+ .tapeCard .variantSize{font-size:12px!important}
+ .tapeCard .variantPrice{font-size:20px!important}
+ .tapeCard .cartBtn{font-size:12px!important;padding:11px 5px!important}
+}
+/* Desktop only: smaller rise and hover movement. */
+@media(min-width:801px) and (prefers-reduced-motion:no-preference){
+ .categoryCard.reveal,.variantCard.reveal{transform:translate3d(0,14px,0)!important}
+ .categoryCard.reveal.revealed,.variantCard.reveal.revealed{transform:none!important;animation:smGentleRise .55s ease-out both!important;animation-delay:calc(var(--reveal-delay,0ms) * .55)!important}
+ @keyframes smGentleRise{from{opacity:0;translate:0 14px}to{opacity:1;translate:0 0}}
+ .categoryCard:hover,.variantCard:hover,.shopCard:hover{transform:translateY(-1px) scale(1.01)!important}
+ .categoryCard .productPhoto img,.variantCard .productPhoto img{transition:transform .25s ease!important}
+ .categoryCard:hover .productPhoto img,.variantCard:hover .productPhoto img{transform:scale(1.015)!important}
+}
+@media(prefers-reduced-motion:reduce){.tapeCard,.tapeCard img{animation:none!important;transition:none!important}}
