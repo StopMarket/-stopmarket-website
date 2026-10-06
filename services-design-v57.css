@@ -32,3 +32,18 @@
 #evelux .eveluxLogo{background:transparent}
 #evelux .eveluxLogo img{mix-blend-mode:multiply}
 #evelux h2,#evelux p{color:#111}
+
+/* Approved light road design for categories and every product listing. */
+#products.catalogPage,#categoryPage.catalogPage{
+ position:relative;isolation:isolate;background-color:#fff9df;
+ background-image:radial-gradient(ellipse at 0 0,rgba(255,212,0,.24),transparent 42%),radial-gradient(ellipse at 100% 100%,rgba(255,212,0,.17),transparent 45%),url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22700%22%20height%3D%22550%22%20viewBox%3D%220%200%20700%20550%22%3E%3Cpath%20d%3D%22M750%20-30C420%2040%20610%20280%20310%20380S10%20500%20-60%20600%22%20fill%3D%22none%22%20stroke%3D%22%23c8c0a2%22%20stroke-opacity%3D%22.14%22%20stroke-width%3D%2294%22%2F%3E%3Cpath%20d%3D%22M750%20-30C420%2040%20610%20280%20310%20380S10%20500%20-60%20600%22%20fill%3D%22none%22%20stroke%3D%22%23fff%22%20stroke-opacity%3D%22.85%22%20stroke-width%3D%226%22%20stroke-dasharray%3D%2224%2030%22%2F%3E%3Cpath%20d%3D%22M710%20-75C380%200%20570%20240%20270%20340S-30%20460%20-100%20560%22%20fill%3D%22none%22%20stroke%3D%22%23ffdb38%22%20stroke-opacity%3D%22.45%22%20stroke-width%3D%223%22%2F%3E%3Cpath%20d%3D%22M790%2015C460%2080%20650%20320%20350%20420S50%20540%20-20%20640%22%20fill%3D%22none%22%20stroke%3D%22%23fff%22%20stroke-opacity%3D%22.65%22%20stroke-width%3D%224%22%2F%3E%3C%2Fsvg%3E");
+ background-position:0 0,100% 100%,right top;background-size:auto,auto,700px 550px;background-repeat:no-repeat,no-repeat,repeat-y;
+}
+#products .categoryCard,#categoryPage .variantCard{position:relative;background:#fff;border:1px solid #eee8d4;border-radius:18px;box-shadow:0 5px 20px rgba(155,125,18,.07);overflow:hidden}
+#products .categoryCard::before,#categoryPage .variantCard::before{content:"";position:absolute;top:5px;left:5px;width:30px;height:30px;border-top:5px solid #ffd400;border-left:5px solid #ffd400;border-radius:15px 0 0 0;pointer-events:none;z-index:1}
+@media(max-width:800px){
+ #products.catalogPage,#categoryPage.catalogPage{background-size:auto,auto,420px 330px}
+ #products .categoryCard,#categoryPage .variantCard{border-radius:14px}
+ #products .categoryCard::before,#categoryPage .variantCard::before{width:22px;height:22px;border-width:4px}
+ .markingService span{display:block;width:100%;white-space:nowrap;overflow-wrap:normal;word-break:normal;font-size:clamp(8px,2.2vw,11px);line-height:2.8;min-height:2.8em;letter-spacing:-.15px}
+}
