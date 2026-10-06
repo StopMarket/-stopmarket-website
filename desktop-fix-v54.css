@@ -38,3 +38,8 @@
     object-fit:contain !important;object-position:center !important;display:block;
   }
 }
+
+@media(min-width:801px) and (prefers-reduced-motion:no-preference){
+  .desktopReveal{opacity:0;transform:translateY(24px);transition:opacity .65s ease,transform .65s ease}
+  .desktopReveal.desktopVisible{opacity:1;transform:none}
+}
